@@ -1,5 +1,7 @@
 package com.adminportal.service.impl;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +36,12 @@ public class BookServiceImpl implements BookService {
 	public Book save(Book book) {
 		// TODO Auto-generated method stub
 		return bookRepository.save(book);
+	}
+
+	@Override
+	public List<Book> findAll() {
+		Iterable<Book> bookList = bookRepository.findAll();
+		return (List<Book>) bookList;
 	}
 
 }

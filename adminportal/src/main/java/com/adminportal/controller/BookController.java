@@ -3,6 +3,7 @@ package com.adminportal.controller;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -41,8 +42,9 @@ public class BookController {
 		try {
 			byte[] bytes = bookImage.getBytes();
 			String name = book.getId()+".png";
-			BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File("src/name/resources/static/image/book/"+name)));
+			BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File("src/main/resources/static/image/book/"+name)));
 			stream.write(bytes);
+			stream.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -51,6 +53,8 @@ public class BookController {
 	
 	@RequestMapping("/bookList")
 	public String bookList(Model model) {
+		List<Book> bookList = bookService.findAll();
+		model.addAttribute("bookList", bookList);
 		return "bookList";
 	}
 }
